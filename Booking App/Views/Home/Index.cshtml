@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div>
+    <div class="text-center">
+        <h1 class="display-4">Welcome To Booking App</h1>
+    </div>
+
+    <ul class="list-group">
+        @{
+            foreach (var hotel in @Model)
+            {
+                <li class="list-group-item">
+                    @hotel.Name -
+                    <span class="badge badge-success">
+                        @hotel.Rate / 5
+                    </span>
+                    <a asp-controller="Home" asp-action="Book" asp-route-id="@hotel.Id">
+                        <input type="button" class="btn btn-sm btn-primary"
+                               value="Book a room" />
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+
+</div>

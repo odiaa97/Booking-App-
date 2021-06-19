@@ -1,0 +1,58 @@
+﻿@model Booking_App.ViewModels.BookRoomViewModel
+@{
+    ViewData["Title"] = "Book a room";
+}
+
+<div>
+    <h2 class="align-items-center">@Model.Hotel_Name</h2>
+
+    <form class="form-group" method="post" action="/home/book">
+
+        <select class="form-select form-control" asp-for="Room_Type" name="Room_Type"
+                asp-items="Html.GetEnumSelectList<RoomTypes>()" style="width: 400px;">
+            <option value="">Select a room type</option>
+        </select><br />
+
+        <span>
+            <label >Number of rooms</label>
+            <input type="number" name="no_rooms" asp-for="No_Rooms" class="input-group form-control" style="width: 250px;" />
+        </span><br />
+
+        <label>Start date: </label>
+        <input asp-for="From"
+               name="From"
+               id="from" 
+               type="datetime" 
+               class="form-control" 
+               value="@DateTime.Now.ToString("MM/dd/yyyy")" 
+               style="width: 250px;" />
+        <br />
+
+        <label>End Date </label>
+        <input id="to" 
+               asp-for="To" 
+               name="To"
+               type="datetime" 
+               class="form-control" 
+               value="@DateTime.Now.ToString("MM/dd/yyyy")" 
+               style="width: 250px;" />
+        <br />
+
+        <input type="submit" class="btn btn-success" value="Book"
+               asp-controller="Home"
+               asp-action="Book"
+               asp-route-id="@Model.Hotel_Id"/>
+    </form>
+</div>
+@section Scripts
+{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#from").datepicker();
+            $("#to").datepicker();
+        });
+    </script>
+}
